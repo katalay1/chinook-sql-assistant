@@ -1,3 +1,6 @@
+# Integrates with Google Gemini 2.5 Flash to convert natural language questions into SQL queries.
+# Handles prompt construction, API calls, and defensive parsing of the returned SQL output.
+
 from google import genai
 from dotenv import load_dotenv
 from prompts import SYSTEM_PROMPT, USER_PROMPT
@@ -8,10 +11,6 @@ load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def generate_sql(question: str, schema: str) -> str:
-    """
-    Takes a natural language question and the DB schema,
-    sends them to Gemini, and returns a SQL query string.
-    """
     system = SYSTEM_PROMPT.format(schema=schema)
     user = USER_PROMPT.format(question=question)
 
@@ -23,12 +22,14 @@ def generate_sql(question: str, schema: str) -> str:
 
     sql = response.text.strip()
 
-    # Strip markdown code fences if Gemini returns them despite instructions
-    if sql.startswith("```"):
-        sql = sql.split("\n", 1)[-1]
-        sql = sql.rsplit("```", 1)[0].strip()
-
-    return sql
+    # Strip markdown code fences
+    if "```" in sql:
+        sql = sql.split("```")[1]  # get content between first pair of backticks
+        # Remove language identifier like 'sql' if present
+        if sql.lower().startswith("sql"):
+            sql = sql[3:]
+    
+    return sql.strip()
 
 # if __name__ == "__main__":
 #     from db import get_schema

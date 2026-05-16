@@ -1,3 +1,6 @@
+# dependencies for the project, including Google Gemini API client, 
+# PostgreSQL adapter, Streamlit for UI, and dotenv for environment variable management
+
 google-genai
 psycopg2-binary
 streamlit

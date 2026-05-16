@@ -1,3 +1,5 @@
+# Streamlit UI with schema browser, example questions, and results display
+
 import streamlit as st
 from db import get_schema, run_query
 from llm import generate_sql

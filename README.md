@@ -17,7 +17,7 @@ This app translates natural language questions into valid PostgreSQL queries usi
 - *"Who are the top 5 artists by number of tracks?"*
 - *"What are total sales by genre?"*
 - *"Which customers have spent the most money?"*
-- *"List all albums by AC/DC"*
+- *"List all albums by aerosmith"*
 
 ---
 

@@ -1,3 +1,5 @@
+# system and user prompt templates for natural language to SQL generation
+
 SYSTEM_PROMPT = """
 You are an expert PostgreSQL assistant. Given a database schema and a natural 
 language question, generate a single valid PostgreSQL query that answers the question.

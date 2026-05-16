@@ -1,3 +1,4 @@
+#exclude .env, pycache, and venv from version control
 .env
 __pycache__/
 *.pyc

@@ -1,3 +1,6 @@
+# Handles all PostgreSQL interactions including connection management and query execution.
+# Dynamically extracts the live database schema from information_schema to feed into the LLM prompt.
+
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
@@ -56,13 +59,10 @@ def get_schema() -> str:
 
 
 def run_query(sql: str) -> tuple[list[dict], list[str]]:
-    """
-    Executes a SQL query and returns (rows, column_names).
-    Raises ValueError if the query is not a SELECT statement.
-    """
-    # Safety guard — only allow SELECT statements
+    #print(f"DEBUG SQL: '{sql}'")
     cleaned = sql.strip().lower()
-    if not cleaned.startswith("select"):
+    cleaned = " ".join(cleaned.split())
+    if not cleaned.startswith("select") and not cleaned.startswith("with"):
         raise ValueError("Only SELECT queries are allowed.")
 
     conn = get_connection()
