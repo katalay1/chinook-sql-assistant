@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/34aa11b7-ef83-4aee-a198-37dc721fa45b
+
 # 🎵 Chinook SQL Assistant
 
 A natural language to SQL interface powered by **Google Gemini** and **PostgreSQL**. Ask questions about the Chinook music store database in plain English — get back SQL queries and results instantly.
